@@ -1,0 +1,395 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #090909;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.app {
+  max-width: 520px;
+  margin: auto;
+  padding: 22px 17px 35px;
+}
+
+.brand {
+  text-align: center;
+  font-family: Georgia, serif;
+  font-size: 31px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin: 8px 0;
+}
+
+.brand span {
+  color: #a78bfa;
+}
+
+.hero {
+  height: 245px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+}
+
+.placeholder {
+  position: absolute;
+  color: #a78bfa;
+  font-size: 65px;
+  text-align: center;
+}
+
+.placeholder small {
+  display: block;
+  font-size: 12px;
+  color: #888;
+}
+
+.card, .tiles button {
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 23px;
+}
+
+.balance {
+  width: 72%;
+  margin: -4px auto 18px;
+  padding: 17px;
+  text-align: center;
+  position: relative;
+  z-index: 3;
+}
+
+.balance small, .stats small {
+  color: #999;
+  font-size: 12px;
+}
+
+.amount {
+  font-size: 35px;
+  font-weight: 800;
+  margin-top: 5px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 19px 8px;
+  text-align: center;
+}
+
+.stats div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  font-size: 24px;
+}
+
+.stats b {
+  font-size: 22px;
+}
+
+.section-title {
+  color: #999;
+  font-size: 11px;
+  text-align: center;
+  margin: 24px 0 15px;
+  letter-spacing: 1.5px;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.tiles button {
+  min-height: 145px;
+  padding: 19px;
+  color: white;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  font-size: 28px;
+}
+
+.tiles button b {
+  font-size: 20px;
+}
+
+.tiles button small {
+  color: #999;
+  font-size: 13px;
+}
+
+.tiles button:last-child {
+  background: linear-gradient(145deg, #28162d, #171014);
+  border-color: #54305f;
+}
+
+.links {
+  margin-top: 17px;
+  overflow: hidden;
+}
+
+.links button {
+  width: 100%;
+  padding: 19px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: white;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #292929;
+  text-align: left;
+  font-size: 24px;
+}
+
+.links button b {
+  font-size: 16px;
+  flex: 1;
+}
+
+.links button span {
+  color: #a78bfa;
+}
+
+#notice {
+  text-align: center;
+  color: #777;
+  font-size: 12px;
+  padding: 20px;
+}
+
+.case-screen {
+  margin-top: 24px;
+  padding: 22px;
+  text-align: center;
+}
+
+.case-screen h2 {
+  margin-top: 24px;
+  letter-spacing: 2px;
+}
+
+.back-button {
+  display: block;
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 15px;
+}
+
+.roulette {
+  display: flex;
+  gap: 12px;
+  overflow: hidden;
+  margin: 28px 0;
+  padding: 18px 0;
+  border-top: 1px solid #393044;
+  border-bottom: 1px solid #393044;
+}
+
+.roulette-item {
+  flex: 0 0 85px;
+  padding: 24px 5px;
+  border-radius: 14px;
+  background: #211b2b;
+  font-weight: bold;
+}
+
+.spinning {
+  animation: caseSpin 2.5s ease-in-out;
+}
+
+@keyframes caseSpin {
+  from { transform: translateX(0); }
+  to { transform: translateX(-180px); }
+}
+
+.open-case-button {
+  width: 100%;
+  padding: 17px;
+  border: none;
+  border-radius: 14px;
+  color: white;
+  background: #7543bd;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+/* MOROZWAY CASE */
+.case-screen {
+  display: none;
+  position: relative;
+  margin-top: 20px;
+  padding: 18px 0;
+  background: #090909;
+  color: #fff;
+  text-align: center;
+}
+
+.case-screen h2 {
+  font-size: 28px;
+  margin: 20px 0;
+}
+
+.case-back {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 52px;
+  height: 52px;
+  border: 1px solid #542034;
+  border-radius: 15px;
+  background: #100d10;
+  color: white;
+  font-size: 32px;
+}
+
+.case-brand {
+  text-align: left;
+  font-family: Georgia, serif;
+  font-size: 29px;
+  font-weight: bold;
+  margin-top: 45px;
+}
+
+.case-brand span {
+  color: #a52c4e;
+}
+
+.case-balance {
+  position: absolute;
+  right: 0;
+  top: 105px;
+  border: 1px solid #662039;
+  border-radius: 13px;
+  padding: 12px 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.case-cost {
+  margin: 30px 0 24px;
+  color: #bbb;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.case-roulette {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #542034;
+  border-radius: 25px;
+  padding: 28px 0;
+  background: linear-gradient(110deg, #10090d, #1d0d15, #10090d);
+  box-shadow: inset 0 0 25px #000;
+}
+
+.case-track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  transform: translateX(0);
+}
+
+.case-prize {
+  width: 130px;
+  height: 175px;
+  flex-shrink: 0;
+  border-radius: 22px;
+  border: 1px solid #512333;
+  border-bottom: 5px solid #9b294e;
+  background: linear-gradient(145deg, #301720, #160e12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-size: 49px;
+}
+
+.case-prize small {
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.case-pointer {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 12px;
+  bottom: 12px;
+  width: 3px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 8px #fff;
+}
+
+.case-screen h3 {
+  text-align: left;
+  margin: 35px 0 20px;
+  font-size: 23px;
+}
+
+.case-odds {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  overflow-x: auto;
+  padding-bottom: 15px;
+}
+
+.case-odds div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 27px;
+  min-width: 39px;
+}
+
+.case-odds b {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.case-spin {
+  width: 100%;
+  height: 68px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 20px;
+  background: #f3eee9;
+  color: #171313;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.case-spin:disabled {
+  opacity: .6;
+}
+
+#caseResult {
+  min-height: 25px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+}

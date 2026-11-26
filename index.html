@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090909">
+  <title>MOROZWAY</title>
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="brand">MOROZ<span>WAY</span></header>
+
+    <section class="hero">
+      <img src="static/mascots.png" alt="MOROZWAY" onerror="this.style.display='none'">
+      <div class="placeholder">♛<small>Наши персонажи</small></div>
+    </section>
+
+    <section class="balance card">
+      <small>ВАШ БАЛАНС</small>
+      <div class="amount">0 ⭐</div>
+    </section>
+
+    <section class="stats card">
+      <div>👥<b>0</b><small>Друзей</small></div>
+      <div>🔥<b>0</b><small>Дней</small></div>
+      <div>⭐<b>+3</b><small>За друга</small></div>
+    </section>
+
+    <p class="section-title">ВОЗМОЖНОСТИ MOROZWAY</p>
+
+    <section class="tiles">
+      <button onclick="showSection('Задания')">
+        📋<b>Задания</b><small>Зарабатывай звёзды</small>
+      </button>
+      <button onclick="showSection('Кейс')">
+        🎁<b>Кейс</b><small>Испытай удачу</small>
+      </button>
+    </section>
+
+    <section class="links card">
+      <button onclick="showSection('Вывод')">☆ <b>Вывод</b><span>›</span></button>
+      <button onclick="showSection('Рефералы')">♧ <b>Рефералы</b><span>›</span></button>
+      <button onclick="showSection('Профиль')">◉ <b>Профиль</b><span>›</span></button>
+    </section>
+
+    <p id="notice">Добро пожаловать в MOROZWAY</p>
+  </main>
+  <script src="static/script.js"></script>
+</body>
+</html>
