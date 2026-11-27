@@ -83,12 +83,10 @@ function openCase() {
 
   updateBalance();
   screen.style.display = "block";
-  screen.scrollIntoView({behavior:"smooth"});
 }
 
 function closeCase() {
   document.getElementById("caseScreen").style.display = "none";
-  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function spinCase() {
@@ -99,38 +97,68 @@ function spinCase() {
   if (button.disabled) return;
 
   button.disabled = true;
+  result.classList.remove("case-result-show");
   result.textContent = "Рулетка крутится...";
 
   const prizes = [
-    "Мишка 🧸",
-    "Ракета 🚀",
-    "Букет 💐",
-    "Торт 🎂",
-    "Кольцо 💍",
-    "Пусто ⚪"
+    { text: "Мишка 🧸", emoji: "🧸", name: "Мишка" },
+    { text: "Ракета 🚀", emoji: "🚀", name: "Ракета" },
+    { text: "Букет 💐", emoji: "💐", name: "Букет" },
+    { text: "Торт 🎂", emoji: "🎂", name: "Торт" },
+    { text: "Кольцо 💍", emoji: "💍", name: "Кольцо" },
+    { text: "Пусто ⚪", emoji: "⚪", name: "Пусто" }
   ];
 
-  const prize = prizes[Math.floor(Math.random() * prizes.length)];
+  const prizeIndex = Math.floor(Math.random() * prizes.length);
+  const prize = prizes[prizeIndex];
+  const targetIndex = 30 + prizeIndex;
+
+  track.replaceChildren();
+  const cards = [];
+
+  for (let i = 0; i < 42; i++) {
+    const item = prizes[i % prizes.length];
+    const card = document.createElement("div");
+    card.className = "case-prize";
+    card.innerHTML = `${item.emoji}<small>${item.name}</small>`;
+    track.appendChild(card);
+    cards.push(card);
+  }
 
   track.style.transition = "none";
-  track.style.transform = "translateX(0)";
+  track.style.transform = "translateX(0px)";
   void track.offsetWidth;
 
-  track.style.transition = "transform 3s cubic-bezier(.12,.75,.15,1)";
-  track.style.transform = "translateX(-500px)";
+  const roulette = track.parentElement;
+  const target = cards[targetIndex];
+  const offset = roulette.clientWidth / 2 -
+    target.offsetLeft - target.offsetWidth / 2;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      track.style.transition =
+        "transform 6.8s cubic-bezier(.08,.72,.12,1)";
+      track.style.transform = `translateX(${offset}px)`;
+    });
+  });
 
   setTimeout(() => {
-    result.textContent = "Результат: " + prize;
+    target.classList.add("is-winner");
+    result.textContent = "Результат: " + prize.text;
+    result.classList.remove("case-result-show");
+    void result.offsetWidth;
+    result.classList.add("case-result-show");
+
     caseHistory.unshift({
-      prize: prize,
+      prize: prize.text,
       date: new Date().toLocaleString("ru-RU")
     });
+
     renderCaseHistory();
     saveGameData();
     button.disabled = false;
-  }, 3100);
+  }, 7100);
 }
-
 
 function updateBalance() {
   const mainBalance = document.querySelector(".amount");
@@ -219,16 +247,24 @@ function openProfile() {
     app.appendChild(profile);
   }
 
+  const tgUser = window.MOROZWAY_TG_USER;
+  if (tgUser) {
+    const fullName = [tgUser.first_name, tgUser.last_name].filter(Boolean).join(" ");
+    document.getElementById("profileName").textContent =
+      fullName || (tgUser.username ? "@" + tgUser.username : "Пользователь");
+    document.getElementById("profileId").textContent =
+      "Telegram ID: " + tgUser.id +
+      (tgUser.username ? " · @" + tgUser.username : "");
+  }
+
   profile.style.display = "block";
   document.getElementById("profileBalance").textContent = balance + " ⭐";
   document.getElementById("profileStars").textContent = balance;
   document.getElementById("profilePrizes").textContent = caseHistory.length;
-  profile.scrollIntoView({behavior:"smooth"});
 }
 
 function closeProfile() {
   document.getElementById("profileScreen").style.display = "none";
-  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 
@@ -274,12 +310,10 @@ function openReferrals() {
   }
 
   screen.style.display = "block";
-  screen.scrollIntoView({behavior:"smooth"});
 }
 
 function closeReferrals() {
   document.getElementById("referralScreen").style.display = "none";
-  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function openTasks() {
@@ -321,12 +355,10 @@ function openTasks() {
   }
 
   screen.style.display = "block";
-  screen.scrollIntoView({behavior:"smooth"});
 }
 
 function closeTasks() {
   document.getElementById("tasksScreen").style.display = "none";
-  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function openTaskCategory(category) {
@@ -475,11 +507,9 @@ function openCommentTasks() {
   }
 
   screen.style.display = "block";
-  screen.scrollIntoView({behavior:"smooth"});
 }
 
 function closeCommentTasks() {
   document.getElementById("commentTaskScreen").style.display = "none";
-  window.scrollTo({top:0,behavior:"smooth"});
 }
 
