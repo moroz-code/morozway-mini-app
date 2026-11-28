@@ -83,12 +83,10 @@ function openCase() {
 
   updateBalance();
   screen.style.display = "block";
-  screen.scrollIntoView({behavior:"smooth"});
 }
 
 function closeCase() {
   document.getElementById("caseScreen").style.display = "none";
-  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function spinCase() {
@@ -99,38 +97,68 @@ function spinCase() {
   if (button.disabled) return;
 
   button.disabled = true;
+  result.classList.remove("case-result-show");
   result.textContent = "Рулетка крутится...";
 
   const prizes = [
-    "Мишка 🧸",
-    "Ракета 🚀",
-    "Букет 💐",
-    "Торт 🎂",
-    "Кольцо 💍",
-    "Пусто ⚪"
+    { text: "Мишка 🧸", emoji: "🧸", name: "Мишка" },
+    { text: "Ракета 🚀", emoji: "🚀", name: "Ракета" },
+    { text: "Букет 💐", emoji: "💐", name: "Букет" },
+    { text: "Торт 🎂", emoji: "🎂", name: "Торт" },
+    { text: "Кольцо 💍", emoji: "💍", name: "Кольцо" },
+    { text: "Пусто ⚪", emoji: "⚪", name: "Пусто" }
   ];
 
-  const prize = prizes[Math.floor(Math.random() * prizes.length)];
+  const prizeIndex = Math.floor(Math.random() * prizes.length);
+  const prize = prizes[prizeIndex];
+  const targetIndex = 30 + prizeIndex;
+
+  track.replaceChildren();
+  const cards = [];
+
+  for (let i = 0; i < 42; i++) {
+    const item = prizes[i % prizes.length];
+    const card = document.createElement("div");
+    card.className = "case-prize";
+    card.innerHTML = `${item.emoji}<small>${item.name}</small>`;
+    track.appendChild(card);
+    cards.push(card);
+  }
 
   track.style.transition = "none";
-  track.style.transform = "translateX(0)";
+  track.style.transform = "translateX(0px)";
   void track.offsetWidth;
 
-  track.style.transition = "transform 3s cubic-bezier(.12,.75,.15,1)";
-  track.style.transform = "translateX(-500px)";
+  const roulette = track.parentElement;
+  const target = cards[targetIndex];
+  const offset = roulette.clientWidth / 2 -
+    target.offsetLeft - target.offsetWidth / 2;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      track.style.transition =
+        "transform 6.8s cubic-bezier(.08,.72,.12,1)";
+      track.style.transform = `translateX(${offset}px)`;
+    });
+  });
 
   setTimeout(() => {
-    result.textContent = "Результат: " + prize;
+    target.classList.add("is-winner");
+    result.textContent = "Результат: " + prize.text;
+    result.classList.remove("case-result-show");
+    void result.offsetWidth;
+    result.classList.add("case-result-show");
+
     caseHistory.unshift({
-      prize: prize,
+      prize: prize.text,
       date: new Date().toLocaleString("ru-RU")
     });
+
     renderCaseHistory();
     saveGameData();
     button.disabled = false;
-  }, 3100);
+  }, 7100);
 }
-
 
 function updateBalance() {
   const mainBalance = document.querySelector(".amount");
@@ -145,17 +173,28 @@ function renderCaseHistory() {
   const history = document.getElementById("caseHistory");
   if (!history) return;
 
-  if (caseHistory.length === 0) {
-    history.innerHTML = "<p>Пока пусто</p>";
+  history.replaceChildren();
+
+  if (!Array.isArray(caseHistory) || caseHistory.length === 0) {
+    const empty = document.createElement("p");
+    empty.textContent = "Пока пусто";
+    history.appendChild(empty);
     return;
   }
 
-  history.innerHTML = caseHistory.map(item => `
-    <div class="history-item">
-      <b>${item.prize}</b>
-      <small>${item.date}</small>
-    </div>
-  `).join("");
+  caseHistory.forEach(item => {
+    const entry = document.createElement("div");
+    entry.className = "history-item";
+
+    const prize = document.createElement("b");
+    prize.textContent = String(item?.prize ?? "");
+
+    const date = document.createElement("small");
+    date.textContent = String(item?.date ?? "");
+
+    entry.append(prize, date);
+    history.appendChild(entry);
+  });
 }
 
 
@@ -223,12 +262,10 @@ function openProfile() {
   document.getElementById("profileBalance").textContent = balance + " ⭐";
   document.getElementById("profileStars").textContent = balance;
   document.getElementById("profilePrizes").textContent = caseHistory.length;
-  profile.scrollIntoView({behavior:"smooth"});
 }
 
 function closeProfile() {
   document.getElementById("profileScreen").style.display = "none";
-  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 
@@ -249,7 +286,7 @@ function openReferrals() {
       <div class="card">
         <h3>Приглашай друзей</h3>
         <p>Получай ⭐ за каждого активного приглашённого друга</p>
-        <div class="case-balance">+3 ⭐</div>
+        <div class="case-balance">Награда задаётся администратором</div>
       </div>
 
       <div class="card">
@@ -274,12 +311,10 @@ function openReferrals() {
   }
 
   screen.style.display = "block";
-  screen.scrollIntoView({behavior:"smooth"});
 }
 
 function closeReferrals() {
   document.getElementById("referralScreen").style.display = "none";
-  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function openTasks() {
@@ -321,12 +356,10 @@ function openTasks() {
   }
 
   screen.style.display = "block";
-  screen.scrollIntoView({behavior:"smooth"});
 }
 
 function closeTasks() {
   document.getElementById("tasksScreen").style.display = "none";
-  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function openTaskCategory(category) {
@@ -338,7 +371,7 @@ function openTaskCategory(category) {
   alert("Этот раздел добавим следующим этапом.");
 }
 
-const commentTaskConfig = {
+window.commentTaskConfig = {
   title: "Рассылка комментариев",
   reward: 2,
   requiredScreenshots: 10,
@@ -410,7 +443,7 @@ function openCommentTasks() {
 
     document.getElementById("copyCommentButton").onclick = async () => {
       try {
-        await navigator.clipboard.writeText(commentTaskConfig.commentText);
+        await navigator.clipboard.writeText(window.commentTaskConfig.commentText);
         document.getElementById("commentSubmitNotice").textContent =
           "Текст скопирован!";
       } catch {
@@ -421,30 +454,6 @@ function openCommentTasks() {
 
     const fileInput = document.getElementById("commentScreenshots");
 
-    fileInput.addEventListener("change", () => {
-      const files = Array.from(fileInput.files || []);
-      const required = commentTaskConfig.requiredScreenshots;
-      const preview = document.getElementById("commentPreview");
-
-      preview.innerHTML = "";
-
-      files.slice(0, required).forEach(file => {
-        if (!file.type.startsWith("image/")) return;
-
-        const img = document.createElement("img");
-        img.src = URL.createObjectURL(file);
-        img.style.width = "100%";
-        img.style.borderRadius = "10px";
-        preview.appendChild(img);
-      });
-
-      document.getElementById("screenshotCounter").textContent =
-        `Выбрано: ${files.length} из ${required}`;
-
-      document.getElementById("submitCommentTask").disabled =
-        files.length !== required ||
-        files.some(file => !file.type.startsWith("image/"));
-    });
 
     document.getElementById("submitCommentTask").onclick = () => {
       document.getElementById("commentSubmitNotice").textContent =
@@ -453,33 +462,31 @@ function openCommentTasks() {
   }
 
   document.getElementById("commentReward").textContent =
-    "+" + commentTaskConfig.reward + " ⭐";
+    "+" + window.commentTaskConfig.reward + " ⭐";
 
   document.getElementById("commentDescription").textContent =
-    commentTaskConfig.description;
+    window.commentTaskConfig.description;
 
   document.getElementById("commentText").textContent =
-    commentTaskConfig.commentText;
+    window.commentTaskConfig.commentText;
 
   document.getElementById("screenshotCounter").textContent =
-    "Выбрано: 0 из " + commentTaskConfig.requiredScreenshots;
+    "Выбрано: 0 из " + window.commentTaskConfig.requiredScreenshots;
 
   const imageBox = document.getElementById("commentExampleImage");
 
-  if (commentTaskConfig.imageUrl) {
+  if (window.commentTaskConfig.imageUrl) {
     document.getElementById("commentImage").src =
-      commentTaskConfig.imageUrl;
+      window.commentTaskConfig.imageUrl;
     imageBox.style.display = "block";
   } else {
     imageBox.style.display = "none";
   }
 
   screen.style.display = "block";
-  screen.scrollIntoView({behavior:"smooth"});
 }
 
 function closeCommentTasks() {
   document.getElementById("commentTaskScreen").style.display = "none";
-  window.scrollTo({top:0,behavior:"smooth"});
 }
 
