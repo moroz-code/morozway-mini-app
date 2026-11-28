@@ -22,8 +22,45 @@ function showSection(section) {
     return;
   }
 
+  if (section === "Вывод") {
+    openWithdraw();
+    return;
+  }
+
   const notice = document.getElementById("notice");
   notice.textContent = "Раздел «" + section + "» скоро появится";
+}
+
+function openWithdraw() {
+  let screen = document.getElementById("withdrawScreen");
+
+  if (!screen) {
+    screen = document.createElement("section");
+    screen.id = "withdrawScreen";
+    screen.className = "case-screen";
+    screen.innerHTML = `
+      <button class="case-back" onclick="closeWithdraw()">‹</button>
+      <h2>Вывод средств</h2>
+      <div class="case-brand">MOROZ<span>WAY</span></div>
+      <div class="case-balance" id="withdrawBalance">0 ⭐</div>
+      <p class="case-cost">Твой доступный баланс</p>
+      <div class="case-odds">
+        <div><b>Выплаты временно недоступны</b></div>
+      </div>
+      <p id="withdrawStatus">Система выплат ещё подключается. Заявки пока не отправляются.</p>
+    `;
+    document.querySelector(".app").appendChild(screen);
+  }
+
+  const amount = document.querySelector(".balance .amount");
+  const display = document.getElementById("withdrawBalance");
+  if (display && amount) display.textContent = amount.textContent.trim();
+  screen.style.display = "block";
+}
+
+function closeWithdraw() {
+  const screen = document.getElementById("withdrawScreen");
+  if (screen) screen.style.display = "none";
 }
 
 function openCase() {

@@ -24,10 +24,28 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.5-4 3-6 7-6s6.5 2 7 6"/></svg>
       </button>
       <div class="topbar-balance"><span class="topbar-amount">0</span><span aria-hidden="true">★</span></div>
-      <button class="topbar-button" type="button" aria-label="Настройки оформления" onclick="document.querySelector('.theme-panel')?.scrollIntoView({behavior:'smooth',block:'center'})">
+      <button class="topbar-button theme-trigger" type="button" aria-label="Цветовая тема" aria-expanded="false" onclick="toggleThemePicker()">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
       </button>
     </header>
+
+    <div class="theme-popover" id="themePopover" aria-label="Выбор цветовой темы" hidden>
+      <div class="theme-popover-title">Цвет оформления</div>
+      <div class="theme-options" role="group" aria-label="Цветовая тема">
+        <button class="theme-dot" data-theme="red" aria-label="Красная"></button>
+        <button class="theme-dot" data-theme="blue" aria-label="Синяя"></button>
+        <button class="theme-dot" data-theme="purple" aria-label="Фиолетовая"></button>
+        <button class="theme-dot" data-theme="emerald" aria-label="Изумрудная"></button>
+        <button class="theme-dot" data-theme="pink" aria-label="Розовая"></button>
+        <button class="theme-dot" data-theme="cyan" aria-label="Бирюзовая"></button>
+        <button class="theme-dot" data-theme="orange" aria-label="Оранжевая"></button>
+        <button class="theme-dot" data-theme="gold" aria-label="Золотая"></button>
+        <button class="theme-dot" data-theme="violet" aria-label="Лавандовая"></button>
+        <button class="theme-dot" data-theme="ice" aria-label="Ледяная"></button>
+        <button class="theme-dot" data-theme="mint" aria-label="Мятная"></button>
+        <button class="theme-dot" data-theme="rose" aria-label="Малиновая"></button>
+      </div>
+    </div>
 
     <section class="hero">
       <div class="hero-glow"></div>
@@ -74,15 +92,6 @@
       <button onclick="openProfile()"><span class="link-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.5-4 3-6 7-6s6.5 2 7 6"/></svg></span><span>Профиль</span><span class="link-arrow">›</span></button>
     </section>
 
-    <section class="theme-panel card reveal">
-      <div><span class="eyebrow">ВНЕШНИЙ ВИД</span><h2>Цветовая тема</h2></div>
-      <div class="theme-options" role="group" aria-label="Цветовая тема">
-        <button class="theme-dot is-active" data-theme="red" aria-label="Красная"></button>
-        <button class="theme-dot" data-theme="blue" aria-label="Синяя"></button>
-        <button class="theme-dot" data-theme="purple" aria-label="Фиолетовая"></button>
-        <button class="theme-dot" data-theme="emerald" aria-label="Изумрудная"></button>
-      </div>
-    </section>
 
     <p id="notice">Добро пожаловать в MOROZWAY</p>
     <footer class="footer"><small>YOUR STARS. YOUR WAY.</small></footer>
