@@ -90,6 +90,15 @@ function closeCase() {
 }
 
 function spinCase() {
+  const resultNotice = document.getElementById("caseResult");
+  if (resultNotice) {
+    resultNotice.textContent =
+      "Кейс пока не подключён к серверу. Прокрутка временно недоступна.";
+  }
+  return;
+
+  // Старая локальная демо-механика оставлена ниже, но недоступна.
+
   const button = document.getElementById("spinButton");
   const track = document.getElementById("caseTrack");
   const result = document.getElementById("caseResult");
@@ -161,10 +170,12 @@ function spinCase() {
 }
 
 function updateBalance() {
-  const mainBalance = document.querySelector(".amount");
+  document.querySelectorAll(".amount").forEach(el => {
+    el.textContent = balance + " ⭐";
+  });
+  const topBalance = document.querySelector(".topbar-amount");
+  if (topBalance) topBalance.textContent = balance;
   const caseBalance = document.getElementById("caseBalance");
-
-  if (mainBalance) mainBalance.textContent = balance + " ⭐";
   if (caseBalance) caseBalance.textContent = balance + " ⭐";
 }
 

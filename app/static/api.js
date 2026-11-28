@@ -41,6 +41,22 @@
       if (typeof updateBalance === "function") updateBalance();
     }
 
+    const homeFriends = document.getElementById("homeFriends");
+    if (homeFriends) {
+      homeFriends.textContent = Number(data.stats.referral_count || 0);
+    }
+
+    const homeDays = document.getElementById("homeDays");
+    const daysValue = data.stats.days_in_bot ?? data.stats.days ?? data.stats.days_active;
+    if (homeDays && daysValue !== undefined && Number.isFinite(Number(daysValue))) {
+      homeDays.textContent = Number(daysValue);
+    }
+
+    const homeReward = document.getElementById("homeReferralReward");
+    if (homeReward && data.stats.referral_reward !== undefined) {
+      homeReward.textContent = "+" + Number(data.stats.referral_reward);
+    }
+
     const profileBalance = document.getElementById("profileBalance");
     const profileStars = document.getElementById("profileStars");
     const referralCount = document.getElementById("referralCount");

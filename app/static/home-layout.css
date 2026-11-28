@@ -1,0 +1,36 @@
+/* Approved MOROZWAY home layout — visual layer only. */
+.home-topbar{display:grid;grid-template-columns:52px 1fr 52px;align-items:center;gap:12px;margin:0 0 8px;position:relative;z-index:5}
+.topbar-button{width:52px;height:52px;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025));color:#dce2f2;display:grid;place-items:center;box-shadow:inset 0 1px rgba(255,255,255,.12),0 10px 24px rgba(0,0,0,.2)}
+.topbar-button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.topbar-balance{justify-self:center;min-width:64px;padding:8px 14px;border:1px solid rgba(var(--accent-rgb),.8);border-radius:999px;background:rgba(13,20,36,.72);color:#eaf0ff;font-weight:800;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 0 22px rgba(var(--accent-rgb),.12)}
+.topbar-amount{font-size:14px;line-height:1;color:#eaf0ff}
+.topbar-balance>span:last-child{font-size:13px;color:#d9e3ff}
+.hero{min-height:320px;margin:0;align-items:flex-end;overflow:visible}
+.hero-glow{opacity:.9}
+.hero-mascots{width:min(100%,390px);max-height:350px;object-fit:contain;object-position:center bottom;-webkit-mask-image:linear-gradient(to bottom,#000 88%,transparent 100%);mask-image:linear-gradient(to bottom,#000 88%,transparent 100%)}
+.balance{position:relative;width:194px;min-height:88px;margin:-52px auto 16px;padding:13px 18px 12px;text-align:center;border-radius:22px;z-index:3;background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.045));border:1px solid rgba(255,255,255,.22);box-shadow:0 18px 40px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.16);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.balance-head{justify-content:center;margin:0 0 3px}
+.balance-head span:first-child{font-size:10px;letter-spacing:.18em;color:#c5c6d2}
+.balance .amount{font-size:34px;line-height:1.05;font-weight:800;color:#fff}
+.balance .amount span{font-size:23px}
+.stats{margin:0 0 16px;min-height:112px;padding:10px 5px;border:1px solid rgba(255,255,255,.17);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025));box-shadow:inset 0 1px rgba(255,255,255,.1);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.stat{min-height:88px;background:transparent!important;border:0!important;box-shadow:none!important}
+.stat .stat-icon{margin-bottom:5px;color:#b8c5e5}
+.stat b{font-size:22px}
+.stat small{font-size:12px;color:#a8a9bd}
+.tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tile,.task-tile{min-height:132px;padding:16px;align-items:flex-start;justify-content:center;flex-direction:column;gap:9px;border-radius:25px;background:linear-gradient(145deg,rgba(255,255,255,.105),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.17);box-shadow:inset 0 1px rgba(255,255,255,.1),0 12px 26px rgba(0,0,0,.16)}
+.tile-icon{font-size:25px;line-height:1;color:#dce6ff}
+.tile-copy{display:flex;flex-direction:column;gap:3px;align-items:flex-start}
+.tile-copy b{font-size:17px}
+.tile-copy small{font-size:12px;color:#a8a9bd}
+.tile-arrow{display:none}
+.case-tile{border-color:rgba(var(--accent-rgb),.58);background:linear-gradient(145deg,rgba(var(--accent-rgb),.17),rgba(255,255,255,.025))}
+.links{margin-top:14px;padding:0 16px;border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.links button{min-height:66px}
+.links button+button{border-top:1px solid rgba(255,255,255,.09)}
+.theme-panel{margin-top:14px}
+.footer{margin-top:30px}
+#notice{min-height:18px}
+@media(max-width:380px){.hero{min-height:285px}.hero-mascots{max-height:315px}.balance{margin-top:-45px}.tile,.task-tile{min-height:122px;padding:13px}.home-topbar{grid-template-columns:46px 1fr 46px}.topbar-button{width:46px;height:46px;border-radius:16px}}
+@media(prefers-reduced-motion:reduce){.topbar-button,.balance,.stat,.tile{transition:none!important}}
